@@ -15,9 +15,9 @@ export default (props) => (
     <div className="card-body">
       <i className={generateIconClass(props)}></i>
       <span className="vdivider"></span>
-      <h4 className="pin-name">
+      <h5 className="pin-name">
         {props.name}
-      </h4>
+      </h5>
       <div>
       </div>
     </div>

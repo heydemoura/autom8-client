@@ -1,0 +1,40 @@
+.navbar {
+  display: flex;
+  flex: 1;
+}
+
+.navbar-dark {
+  background-color: #182836;
+  border-bottom: 3px solid #172735;
+  color: #FFF;
+}
+
+.navbar-left {
+  flex: 1;
+  justify-self: flex-start;
+  text-align: left;
+
+  i.mdi {
+    font-size: 32px;
+  }
+}
+
+.navbar-right {
+  flex: 1;
+  justify-self: flex-end;
+  text-align: right;
+
+  i.mdi {
+    font-size: 32px;
+    transition: all 0.5s ease-in-out;
+
+    &.active {
+      color: #3EAE6A;
+    }
+  }
+}
+
+.navbar-brand {
+  flex: 1;
+  text-align: center;
+}
