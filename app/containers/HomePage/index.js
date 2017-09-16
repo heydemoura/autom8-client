@@ -20,6 +20,7 @@ import messages from './messages';
 import { fetchPins, togglePin } from './actions';
 
 import TopBar from '../TopBar';
+import DashView from '../DashView';
 
 class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
@@ -43,11 +44,12 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
     return (
       <div>
         <TopBar />
-        <div className="header">
-        </div>
-        <div className="container">
-          <div className="pin-list">
-            { this.renderPinList(this.props.pins) }
+        <div className="content">
+          <DashView />
+          <div className="container">
+            <div className="pin-list">
+              { this.renderPinList(this.props.pins) }
+            </div>
           </div>
         </div>
       </div>

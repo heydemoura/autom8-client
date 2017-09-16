@@ -9,6 +9,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 
+import dashReducer from 'containers/DashView/reducer';
 import pinsReducer from 'containers/HomePage/reducer';
 import topBarReducer from 'containers/TopBar/reducer';
 
@@ -49,6 +50,7 @@ export default function createReducer(asyncReducers) {
     language: languageProviderReducer,
     pins: pinsReducer,
     topBar: topBarReducer,
+    dashView: dashReducer,
     ...asyncReducers,
   });
 }
