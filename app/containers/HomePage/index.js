@@ -24,7 +24,7 @@ import DashView from '../DashView';
 
 class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
-    this.props.fetchPins()
+    this.props.fetchPins();
   }
 
   renderPinList(pins) {
@@ -33,6 +33,10 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
     }
 
     const { props } = this;
+    if (!pins.data.length) {
+      return <h1>No devices registered</h1>;
+    }
+
     return pins.data.map((pin) => {
       return (
         <PinCard name={pin.name} power={pin.value} onClick={() => props.togglePin(pin.id)} key={pin.id} />
