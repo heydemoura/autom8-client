@@ -11,14 +11,60 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+
+import { connect } from 'react-redux';
+
+import PinCard from 'components/PinCard';
 import messages from './messages';
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+import { fetchPins, togglePin } from './actions';
+
+class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  componentWillMount() {
+    this.props.fetchPins()
+  }
+
+  renderPinList(pins) {
+    if (pins.rejected === true) {
+      return <h1>Failed!</h1>;
+    }
+
+    const { props } = this;
+    return pins.data.map((pin) => {
+      return (
+        <PinCard name={pin.name} power={pin.value} onClick={() => props.togglePin(pin.id)} key={pin.id} />
+      );
+    });
+  }
+
   render() {
     return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
+      <div>
+        <div className="header">
+          <h4>
+            <i className="mdi mdi-hotel"></i>
+            &nbsp; My Bed Room
+          </h4>
+        </div>
+        <div className="container">
+          <div className="pin-list">
+            { this.renderPinList(this.props.pins) }
+          </div>
+        </div>
+      </div>
     );
   }
 }
+
+const mapStateToProps = (store) => ({
+  pins: store.get('pins').toJS(),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  dispatch,
+  fetchPins: () => dispatch(fetchPins()),
+  togglePin: (id) => dispatch(togglePin(id)).then(() => dispatch(fetchPins())),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+
