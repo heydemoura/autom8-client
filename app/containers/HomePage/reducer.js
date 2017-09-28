@@ -1,6 +1,7 @@
 import { fromJS } from 'immutable';
 import {
   FETCH_PINS_DATA,
+  SET_PINS_DATA,
   TOGGLE_PIN_STATE
 } from './constants';
 
@@ -40,6 +41,10 @@ export default function (state = initialState, action) {
 
     case `${TOGGLE_PIN_STATE}_FULLFILED`:
       return state;
+
+    case SET_PINS_DATA:
+      return state
+        .set('data', fromJS(action.payload));
 
     default:
       return state;

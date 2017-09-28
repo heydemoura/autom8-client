@@ -4,4 +4,5 @@
  *
  */
 
-export const DEFAULT_ACTION = 'app/TopBar/DEFAULT_ACTION';
+export const SOCKET_CONNECTED = 'app/TopBar/SOCKET_CONNECTED';
+export const SOCKET_DISCONNECTED = 'app/TopBar/SOCKET_DISCONNECTED';

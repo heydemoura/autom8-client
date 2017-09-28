@@ -1,4 +1,5 @@
-const apiUrl = 'http://192.168.25.232:3000/';
+export const apiUrl = 'http://192.168.25.232:4000/';
+export const socketUrl = 'http://192.168.25.232:3001';
 
 export const api = {
   fetchPins: () => ({

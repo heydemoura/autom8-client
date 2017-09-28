@@ -20,6 +20,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'less/main.less';
 import 'mdi/css/materialdesignicons.min.css';
 
+
 // Import root app
 import App from 'containers/App';
 

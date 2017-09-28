@@ -6,15 +6,20 @@
 
 import { fromJS } from 'immutable';
 import {
-  DEFAULT_ACTION,
+  SOCKET_CONNECTED,
+  SOCKET_DISCONNECTED,
 } from './constants';
 
-const initialState = fromJS({});
+const initialState = fromJS({
+  connected: false,
+});
 
 function topBarReducer(state = initialState, action) {
   switch (action.type) {
-    case DEFAULT_ACTION:
-      return state;
+    case SOCKET_CONNECTED:
+      return state.set('connected', fromJS(true));
+    case SOCKET_DISCONNECTED:
+      return state.set('connected', fromJS(false));
     default:
       return state;
   }

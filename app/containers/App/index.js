@@ -19,6 +19,10 @@ export default class App extends React.PureComponent { // eslint-disable-line re
     children: React.PropTypes.node,
   };
 
+  constructor() {
+    super()
+  }
+
   render() {
     return (
       <div>

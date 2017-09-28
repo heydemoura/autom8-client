@@ -5,11 +5,18 @@
  */
 
 import {
-  DEFAULT_ACTION,
+  SOCKET_CONNECTED,
+  SOCKET_DISCONNECTED,
 } from './constants';
 
-export function defaultAction() {
+export function socketConnected() {
   return {
-    type: DEFAULT_ACTION,
+    type: SOCKET_CONNECTED,
+  };
+}
+
+export function socketDisconnected() {
+  return {
+    type: SOCKET_DISCONNECTED,
   };
 }

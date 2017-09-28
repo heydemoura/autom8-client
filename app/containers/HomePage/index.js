@@ -17,7 +17,8 @@ import { connect } from 'react-redux';
 import PinCard from 'components/PinCard';
 import messages from './messages';
 
-import { fetchPins, togglePin } from './actions';
+import { fetchPins, setPins, togglePin } from './actions';
+import { apiUrl } from 'config';
 
 import TopBar from '../TopBar';
 import DashView from '../DashView';
@@ -65,11 +66,21 @@ const mapStateToProps = (store) => ({
   pins: store.get('pins').toJS(),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  dispatch,
-  fetchPins: () => dispatch(fetchPins()),
-  togglePin: (id) => dispatch(togglePin(id)).then(() => dispatch(fetchPins())),
-});
+const mapDispatchToProps = (dispatch) => {
+  socket.on('pins/toggle', () => socket.emit('pins/list'));
+  socket.on('pins/list', (data) => dispatch(setPins(data)))
+
+  return {
+    dispatch,
+    fetchPins: () => {
+      socket.emit('pins/list')
+    },
+    togglePin: (id) => {
+      socket.emit('pins/toggle', { id });
+      // return dispatch(togglePin(id));
+    },
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
 

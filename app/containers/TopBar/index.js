@@ -8,16 +8,20 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import makeSelectTopBar, { connectionSelector } from './selectors';
+import { socketConnected, socketDisconnected } from './actions';
+import { socketUrl } from 'config';
+
+var socket = io(socketUrl);
+window.socket = socket;
 
 export class TopBar extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  renderStatusIcon(status) {
+  renderStatusIcon(connection) {
+    console.log(connection)
     let classes = 'mdi ';
-    if (status.fulfilled === true) {
+    if (connection) {
       classes += 'mdi-cast-connected active';
-    } else if (status.rejected === true) {
-      classes += 'mdi-cast-off';
     } else {
-      classes += 'mdi-cast-connected active';
+      classes += 'mdi-cast-off';
     }
 
     return <i className={classes} />;
@@ -50,6 +54,19 @@ const mapStateToProps = createStructuredSelector({
 });
 
 function mapDispatchToProps(dispatch) {
+  socket.on('connect', (client) => {
+    console.log('Socket conencted')
+    dispatch(socketConnected())
+
+
+    socket.on('disconnect', () => {
+      dispatch(socketDisconnected())
+    })
+
+    socket.on('pins', (obj) => {
+      console.log('Recebido teste', obj)
+    })
+  })
   return {
     dispatch,
   };

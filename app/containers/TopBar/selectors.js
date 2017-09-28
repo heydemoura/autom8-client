@@ -8,12 +8,7 @@ const selectTopBarDomain = () => (state) => state.get('topBar');
 /**
  * Other specific selectors
  */
-const connectionSelector = () => (state) => {
-  const connection = state.get('pins').toJS();
-  delete connection.data;
-  return connection;
-};
-
+const connectionSelector = () => (state) => state.get('topBar').toJS().connected;
 
 /**
  * Default selector used by TopBar
